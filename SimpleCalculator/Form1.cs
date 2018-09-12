@@ -15,6 +15,7 @@ namespace SimpleCalculator
         string operand2 = string.Empty;
         string result;
         char operation;
+        private CalculatorReference.CalculatorSoapClient CalcRef;
 
         public frmCalculator()
         {
@@ -22,8 +23,11 @@ namespace SimpleCalculator
         }
 
         private void frmCalculator_Load(object sender, EventArgs e)
-        {
-            btnOne.Click += new EventHandler(btn_Click);
+      
+          {
+            CalcRef = new CalculatorReference.CalculatorSoapClient();
+      
+          btnOne.Click += new EventHandler(btn_Click);
             btnTwo.Click += new EventHandler(btn_Click);
         
             btnDot.Click += new EventHandler(btn_Click);
@@ -146,21 +150,23 @@ namespace SimpleCalculator
             switch (operation)
             {
                 case '+':
-                    result = (opr1 + opr2).ToString();
+                    result = Convert.ToString(CalcRef.Add(opr1, opr2));
                     break;
 
                 case '-':
-                    result = (opr1 - opr2).ToString();
+                    
+                    result = Convert.ToString(CalcRef.Subtract(opr1, opr2));
                     break;
 
                 case '*':
                     result = (opr1 * opr2).ToString();
+                    result = Convert.ToString(CalcRef.Multiply(opr1, opr2));
                     break;
 
                 case '/':
                     if (opr2 != 0)
                     {
-                        result = (opr1 / opr2).ToString();
+                        result = Convert.ToString(CalcRef.Divide(opr1, opr2));
                     }
                     else
                     {
@@ -232,9 +238,11 @@ namespace SimpleCalculator
             txtInput.Text = string.Empty;
         }
 
+      
         private void btnTwo_Click(object sender, EventArgs e)
         {
 
         }
+
     }
 }
