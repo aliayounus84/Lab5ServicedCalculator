@@ -27,7 +27,7 @@ namespace SimpleCalculator
           {
             CalcRef = new CalculatorReference.CalculatorSoapClient();
       
-          btnOne.Click += new EventHandler(btn_Click);
+            btnOne.Click += new EventHandler(btn_Click);
             btnTwo.Click += new EventHandler(btn_Click);
         
             btnDot.Click += new EventHandler(btn_Click);
@@ -173,6 +173,8 @@ namespace SimpleCalculator
                         MessageBox.Show("Can't divide by zero");
                     }
                     break;
+
+             
             }
 
             txtInput.Text = result.ToString();
@@ -190,7 +192,7 @@ namespace SimpleCalculator
             double opr1;
             if (double.TryParse(txtInput.Text, out opr1))
             {
-                txtInput.Text = (Math.Sqrt(opr1)).ToString();
+                txtInput.Text = CalcRef.SqrRoot(opr1).ToString();
             }
         }
 
@@ -199,7 +201,7 @@ namespace SimpleCalculator
             double opr1;
             if (double.TryParse(txtInput.Text, out opr1))
             {
-                txtInput.Text = (opr1 / 2).ToString();
+                txtInput.Text = CalcRef.Halve(opr1).ToString();
             }
         }
 
@@ -208,7 +210,7 @@ namespace SimpleCalculator
             double opr1;
             if (double.TryParse(txtInput.Text, out opr1))
             {
-                txtInput.Text = (opr1 / 4).ToString();
+                txtInput.Text = CalcRef.Quarter(opr1).ToString();
             }
         }
 
